@@ -20,9 +20,20 @@ async def cmd_start(message: Message):
     await message.reply(f"Hello!\nYour ID: {message.from_user.id}\nYour name: {message.from_user.first_name}")
 
 
-@dp.message(Command('help'))
+@dp.message(Command("help"))
 async def get_help(message: Message):
-    await message.answer("This is /help command!")
+    text = """
+Available commands:
+
+/start — start bot
+/help — list commands
+/charlie — photo of Charlie
+/lika — photo of Lika
+/truth — Daryna
+/sticker — send sticker
+/emoji — test emoji
+"""
+    await message.answer(text)
 
 
 @dp.message(F.text == "How are you?")

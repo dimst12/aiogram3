@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command
 from aiogram.types import FSInputFile
 from aiogram.types import Message
+from aiogram.utils.markdown import hlink
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,7 +24,7 @@ async def cmd_start(message: Message):
 @dp.message(Command("help"))
 async def get_help(message: Message):
     text = """
-Available commands:
+Current available commands:
 
 /start — start bot
 /help — list commands
@@ -34,6 +35,14 @@ Available commands:
 /emoji — test emoji
 """
     await message.answer(text)
+
+
+@dp.message(Command("github"))
+async def send_github_repo(message: Message):
+    await message.answer(
+        hlink("GitHub repository", "https://github.com/dimst12/aiogram3"),
+        parse_mode="HTML"
+    )
 
 
 @dp.message(F.text == "How are you?")

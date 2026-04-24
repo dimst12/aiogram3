@@ -4,13 +4,16 @@ from aiogram.types import FSInputFile
 from aiogram.types import Message
 from aiogram.utils.markdown import hlink
 
+import handlers.keyboards as kb
+
 
 router = Router()
 
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.reply(f"Hello!\nYour ID: {message.from_user.id}\nYour name: {message.from_user.first_name}")
+    await message.reply(f"Hello!\nYour ID: {message.from_user.id}\nYour name: {message.from_user.first_name}",
+                        reply_markup=kb.inline_cars())
 
 
 @router.message(Command("help"))
@@ -18,7 +21,7 @@ async def get_help(message: Message):
     text = """
 Current available commands:
 
-/start — start bot
+/start — start bot and overview of badminton websites
 /help — list commands
 /charlie — photo of Charlie
 /lika — photo of Lika
